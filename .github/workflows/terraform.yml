@@ -65,7 +65,7 @@ jobs:
         SUBSCRIPTION_ID = "${{secrets.AZURE_SUBSCRIPTION_ID }}"
         CLIENT_ID = "${{secrets.POC_SP_CLIENT_ID }}"
         CLIENT_SECRET = "${{secrets.POC_SP_CLIENT_SECRET }}"
-        ENV_ID = "test"
+        ENV_ID = "mck"
         DEMO_SECRET = "test"
         ADMIN_LOGIN = "${{secrets.EP_ADMIN_LOGIN}}"
         ADMIN_PASSWORD = "${{secrets.EP_ADMIN_PASSWORD}}"
