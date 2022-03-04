@@ -17,7 +17,7 @@ resource "azurerm_sql_server" "sql" {
 # Deploy Azure Elastic Pool
 
 resource "azurerm_mssql_elasticpool" "ep" {
-  name                = format("sql-elastic-pool-%s-uksouth", var.ENV_ID) # Change name for own purposes.
+  name                = format("${random_string.random.result}sql-elastic-pool-%s-uksouth", var.ENV_ID) # Change name for own purposes.
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   server_name         = azurerm_sql_server.sql.name
