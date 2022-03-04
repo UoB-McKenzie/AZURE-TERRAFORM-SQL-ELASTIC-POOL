@@ -54,7 +54,7 @@ resource "random_string" "random" {
 
 resource "azurerm_resource_group" "rg" {
   name     = format("${random_string.random.result}rg-sql-elastic-pool-%s-uksouth", var.ENV_ID) # Change name for own purposes. 
-  location = "UK South"
+  location = "westeurope"
 
  tags = {
     Service        =  "SQL Elastic Pool",
