@@ -11,8 +11,8 @@ resource "azurerm_monitor_action_group" "action_group" {
   short_name          = format("monitor-%s", var.ENV_ID)
 
    email_receiver {
-    name                    = "Tim Packwood"
-    email_address           = "t.a.packwood@bham.ac.uk"
+    name                    = "D McKenzie"
+    email_address           = "d.a.mckenzie@bham.ac.uk"
     use_common_alert_schema = true
   }
 
@@ -38,7 +38,7 @@ notification {
     operator  = "GreaterThan"
 
     contact_emails = [
-        "t.a.packwood@bham.ac.uk",
+        "d.a.mckenzie@bham.ac.uk",
     ]
   }
 
@@ -48,7 +48,7 @@ notification {
     operator  = "GreaterThan"
 
     contact_emails = [
-      "t.a.packwood@bham.ac.uk",
+      "d.a.mckenzie@bham.ac.uk",
     ]
   }
 
