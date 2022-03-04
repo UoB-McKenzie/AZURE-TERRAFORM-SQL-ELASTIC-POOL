@@ -41,8 +41,9 @@ provider "azurerm" {
   client_secret   = var.CLIENT_SECRET
 }
 
+
 resource "random_string" "random" {
-    length = 4
+    length = 5
     special = false
     upper = false
 
