@@ -1,0 +1,107 @@
+name: 'Terraform'
+
+# Run pipeline based on workflow event
+
+on:
+  pull_request:
+  workflow_dispatch:
+    
+jobs:
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    # Checkout the repository to the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        cli_config_credentials_token: ${{ secrets.TF_API_TOKEN_POC }}
+    
+    # Construct .tsvars dynamically based on branch and environment  
+
+    - name: Setup Terraform development variables
+
+      if: github.ref == 'refs/heads/development'
+      run: |-
+        cat > pipelinedev.auto.tfvars <<EOF
+        TENANT_ID = "test"
+        SUBSCRIPTION_ID = "test"
+        CLIENT_ID = "test"
+        CLIENT_SECRET = "test"
+        ENV_ID = "test"
+        DEMO_SECRET = "test"
+        EOF
+
+    - name: Setup Terraform test variables
+
+      if: github.ref == 'refs/heads/test'
+      run: |-
+        cat > pipelinedev.auto.tfvars <<EOF
+        TENANT_ID = "test"
+        SUBSCRIPTION_ID = "test"
+        CLIENT_ID = "test"
+        CLIENT_SECRET = "test"
+        ENV_ID = "test"
+        DEMO_SECRET = "test"
+        EOF
+
+    - name: Setup Terraform production variables
+
+      if: github.ref == 'refs/heads/main'
+      run: |-
+        cat > pipelinedev.auto.tfvars <<EOF
+        TENANT_ID = "${{secrets.AZURE_TENANT_ID }}"
+        SUBSCRIPTION_ID = "${{secrets.AZURE_SUBSCRIPTION_ID }}"
+        CLIENT_ID = "${{secrets.POC_SP_CLIENT_ID }}"
+        CLIENT_SECRET = "${{secrets.POC_SP_CLIENT_SECRET }}"
+        ENV_ID = "test"
+        DEMO_SECRET = "test"
+        ADMIN_LOGIN = "${{secrets.EP_ADMIN_LOGIN}}"
+        ADMIN_PASSWORD = "${{secrets.EP_ADMIN_PASSWORD}}"
+        EOF
+
+    # Insert terraform state dynamically depending on branch
+
+    - name: Terraform Init - Development
+      if: github.ref == 'refs/heads/development'
+      run: |
+        echo "head_ref" && echo ${{ github.head_ref }}
+        echo "ref" && echo ${{ github.ref }}
+        terraform init -backend-config=backends/backend-dev.hcl
+
+    - name: Terraform Init - Test
+      if: github.ref == 'refs/heads/test'
+      run: |
+        echo "head_ref" && echo ${{ github.head_ref }}
+        echo "ref" && echo ${{ github.ref }}
+        terraform init -backend-config=backends/backend-test.hcl
+
+    - name: Terraform Init - Production
+      if: github.ref == 'refs/heads/main'
+      run: |
+        echo "head_ref" && echo ${{ github.head_ref }}
+        echo "ref" && echo ${{ github.ref }}
+        terraform init -backend-config=backends/backend-prod.hcl
+    
+    # Run automated tests
+    - name: Run automated tests
+      run: echo "Automated tests run here"
+
+    # Generates an execution plan for Terraform
+    - name: Terraform Plan
+      run: terraform plan
+
+      # On push to main, build or change infrastructure according to Terraform configuration files
+    - name: Terraform Apply
+      run: terraform apply -auto-approve
