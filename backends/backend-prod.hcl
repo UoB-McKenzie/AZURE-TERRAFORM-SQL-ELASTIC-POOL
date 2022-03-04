@@ -1,3 +1,3 @@
-workspaces { name = "POC-EP-AZURE" }
+workspaces { name = "Azure-EP" }
 hostname     = "app.terraform.io"
-organization = "AZURE_POCS"
+organization = "mckenziedev"
