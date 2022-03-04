@@ -4,7 +4,7 @@
 # Deploy Azure SQL Database 1
 
 resource "azurerm_mssql_database" "sql-db-1" {
-  name               = format("db-title-elastic-pool-%s-uksouth", var.ENV_ID) # Change name for own purposes.
+  name               = format("${random_string.random.result}db-title-elastic-pool-%s-uksouth", var.ENV_ID) # Change name for own purposes.
   server_id          = azurerm_sql_server.sql.id
   collation          = "SQL_Latin1_General_CP1_CI_AS"
   license_type       = "LicenseIncluded"
@@ -13,7 +13,7 @@ resource "azurerm_mssql_database" "sql-db-1" {
   geo_backup_enabled = false
 
    tags = {
-    Service        =  "SQL Elastic Pool - DB name 1",
+    Service        =  "SQL Elastic Pool - DB",
     Last_Deployment = timestamp(),
     Environment     = var.ENV_ID
   }

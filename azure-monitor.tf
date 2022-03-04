@@ -6,7 +6,7 @@
 
 resource "azurerm_monitor_action_group" "action_group" {
   
-  name                = format("monitor-group-%s-uksouth", var.ENV_ID) # Change name for own purposes.
+  name                = format("${random_string.random.result}monitor-group-%s-uksouth", var.ENV_ID) # Change name for own purposes.
   resource_group_name = azurerm_resource_group.rg.name
   short_name          = format("monitor-%s", var.ENV_ID)
 

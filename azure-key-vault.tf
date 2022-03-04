@@ -5,7 +5,7 @@
 # Deploy azure key vault
 
 resource "azurerm_key_vault" "kv" {
-  name                        = format("demonkvname%s", var.ENV_ID) # Change for your instance
+  name                        = format("${random_string.random.result}demonkvname%s", var.ENV_ID) # Change for your instance
   location                    = azurerm_resource_group.rg.location
   resource_group_name         = azurerm_resource_group.rg.name
   enabled_for_disk_encryption = true

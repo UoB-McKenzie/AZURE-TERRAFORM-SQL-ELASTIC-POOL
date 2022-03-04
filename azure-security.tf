@@ -3,7 +3,7 @@
 #  - NOTE: Azure defender must be enabled for the subscription
 
 resource "azurerm_security_center_assessment_policy" "sec_center" {
-  display_name = format("policy-%s", var.ENV_ID) # Change name for own purposes.
+  display_name = format("${random_string.random.result}policy-%s", var.ENV_ID) # Change name for own purposes.
   severity     = "Medium"
   description  = "Description of your security policy"
 }
