@@ -41,19 +41,10 @@ provider "azurerm" {
   client_secret   = var.CLIENT_SECRET
 }
 
-resource "random_string" "random" {
-    length = 6
-    special = false
-    upper = false
-
-}
-
-
-
 # Create azure resource group
 
 resource "azurerm_resource_group" "rg" {
-  name     = format("${random_string.random.result}rg-sql-elastic-pool-%s-uksouth", var.ENV_ID) # Change name for own purposes. 
+  name     = format("rg-sql-elastic-pool-%s-uksouth", var.ENV_ID) # Change name for own purposes. 
   location = "UK South"
 
  tags = {
