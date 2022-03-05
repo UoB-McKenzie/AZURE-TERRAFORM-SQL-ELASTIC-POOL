@@ -29,9 +29,7 @@ terraform {
   }
 }  
 
-  
-  
-}
+
 
 # Get configuration parameters from current deployment process
 
