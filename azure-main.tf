@@ -11,9 +11,7 @@ terraform {
 
   # Comment out to use local state files 
 
- # backend "remote" {}
-  
-  
+  #backend "remote" {}
 
   required_providers {
     azurerm = {
@@ -21,16 +19,19 @@ terraform {
       version = "=2.91.0"
     }
   }
+
+}
+
+terraform {
   backend "azurerm" {
     resource_group_name  = "terraformabackend-rg"
     storage_account_name = "terraformbackendsa2320"
     container_name       = "tfstate"
     key                  = "prod.terraform.tfstate"
   }
-}  
-
-
 }
+
+
 # Get configuration parameters from current deployment process
 
 data "azurerm_client_config" "current" {}
