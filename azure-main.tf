@@ -30,7 +30,7 @@ terraform {
 }  
 
 
-
+}
 # Get configuration parameters from current deployment process
 
 data "azurerm_client_config" "current" {}
