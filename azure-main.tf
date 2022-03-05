@@ -14,7 +14,6 @@ terraform {
  # backend "remote" {}
   
   
-  terraform {
   backend "azurerm" {
     resource_group_name  = "terraformabackend-rg"
     storage_account_name = "terraformbackendsa2320"
