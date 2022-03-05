@@ -98,7 +98,7 @@ jobs:
         echo "head_ref" && echo ${{ github.head_ref }}
         echo "ref" && echo ${{ github.ref }}
         terraform init --force-copy
-      # terraform init -backend-config=backends/backend-prod.hcl
+      # terraform init -backend-config=backends/backend-prod.hcl # unrem to user tertraform.io backend
     
     # Run automated tests
     - name: Run automated tests
