@@ -14,6 +14,13 @@ terraform {
  # backend "remote" {}
   
   
+
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "=2.91.0"
+    }
+  }
   backend "azurerm" {
     resource_group_name  = "terraformabackend-rg"
     storage_account_name = "terraformbackendsa2320"
@@ -22,13 +29,8 @@ terraform {
   }
 }  
 
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "=2.91.0"
-    }
-  }
-
+  
+  
 }
 
 # Get configuration parameters from current deployment process
