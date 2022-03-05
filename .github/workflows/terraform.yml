@@ -95,7 +95,7 @@ jobs:
         terraform init -backend-config=backends/backend-test.hcl
 
     - name: Terraform Init - Production
-      if: github.ref == 'refs/heads/main'
+      if: github.ref == 'refs/heads/dev'
       run: |
         echo "head_ref" && echo ${{ github.head_ref }}
         echo "ref" && echo ${{ github.ref }}
