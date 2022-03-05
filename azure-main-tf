@@ -4,7 +4,7 @@
 #  - Authenication with Azure via Service Principle 
 #  - Basic Azure structures such as resource groups
 
-
+# ddd
 # Configure terraform resource providers and remote backend state management
 
 terraform {
