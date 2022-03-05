@@ -11,7 +11,17 @@ terraform {
 
   # Comment out to use local state files 
 
-  backend "remote" {}
+ # backend "remote" {}
+  
+  
+  terraform {
+  backend "azurerm" {
+    resource_group_name  = "terraformabackend-rg"
+    storage_account_name = "terraformbackendsa2320"
+    container_name       = "tfstate"
+    key                  = "prod.terraform.tfstate"
+  }
+}  
 
   required_providers {
     azurerm = {
