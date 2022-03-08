@@ -53,7 +53,7 @@ provider "azurerm" {
 
 
 resource "random_string" "random" {
-    length = 7
+    length = 4
     special = false
     upper = false
 
